@@ -115,7 +115,7 @@ graph TD
 ## 4. Technical Glossary
 * **Kinodynamic Planning:** Path planning that satisfies both the kinematic constraints (geometry of the robot, steering limits) and dynamic constraints (mass, momentum, friction limits) of the system.
 * **MPC (Model Predictive Control):** An advanced control algorithm that optimizes a sequence of control inputs over a future time horizon by continually simulating the robot's dynamic model, factoring in real-world constraints like max torque and predicted slip.
-* **Terrain-Weighted A*:** A variation of the standard A* pathfinding algorithm where the traversal cost between nodes is modified by the semantic type of the terrain.
+* **Terrain-Weighted A\*:** A variation of the standard A* pathfinding algorithm where the traversal cost between nodes is modified by the semantic type of the terrain.
 * **ROS 2 (Robot Operating System 2):** The standard middleware for robotics software development, utilizing DDS for secure, real-time message passing between software components (nodes).
 * **2.5D Elevation Map:** A grid map where each 2D cell contains a single height value, providing a lightweight way to represent uneven outdoor terrain without the compute overhead of full 3D voxels.
 * **Slip Estimator:** An algorithm that compares the expected velocity of the wheels (from motor encoders) against the actual movement of the robot (from IMU/GPS) to detect loss of traction in real-time.
