@@ -1,7 +1,7 @@
 # Terrain-Adaptive Kinodynamic Planning Architecture (TAKPA)
 
 ## 1. Architecture Overview
-The TAKPA solution is a cloud-agnostic, edge-to-cloud microservices architecture centered around a robust planning and control algorithm for outdoor mobile robots. The core algorithmic approach utilizes a hybrid, terrain-aware pipeline: a Global Planner generates a path using a modified A* algorithm that weights route selection based on semantic terrain costs (e.g., mud is higher cost than gravel), updated continuously via satellite imagery and fleet data. Locally, the robot relies on a Terrain-Adaptive Model Predictive Controller (MPC). This MPC dynamically adjusts its kinodynamic constraints, such as maximum acceleration, turning velocity, and prediction horizon, based on real-time slip detection and terrain classification provided by an onboard sensor fusion node (LiDAR, RGB-D, and IMU). The cloud backend manages fleet telemetry, heavy mapping aggregation, and distributed AI model training for continuous improvement of the semantic terrain classifier.
+The TAKPA solution is a cloud-agnostic, edge-to-cloud microservices architecture centered around a robust planning and control algorithm for outdoor mobile robots. The core algorithmic approach utilizes a hybrid, terrain-aware pipeline: a Global Planner generates a path using a modified A* algorithm that weights route selection based on semantic terrain costs (e.g. mud is higher cost than gravel), updated continuously via satellite imagery and fleet data. Locally, the robot relies on a Terrain-Adaptive Model Predictive Controller (MPC). This MPC dynamically adjusts its kinodynamic constraints, such as maximum acceleration, turning velocity, and prediction horizon, based on real-time slip detection and terrain classification provided by an onboard sensor fusion node (LiDAR, RGB-D, and IMU). The cloud backend manages fleet telemetry, heavy mapping aggregation, and distributed AI model training for continuous improvement of the semantic terrain classifier.
 
 ## 2. Architecture Diagram
 ```mermaid
@@ -98,10 +98,10 @@ graph TD
 
 ### Reliability
 * **Decoupled Autonomy:** The critical planning loop (Sensors -> Map -> A* -> MPC -> Motors) runs entirely on the edge. Cloud disconnects do not impact the robot's immediate safety or ability to navigate local obstacles.
-* **Graceful Degradation:** If the terrain classifier fails or environmental conditions blind the cameras, the MPC defaults to a highly conservative kinematic profile, assuming the terrain is low-traction (e.g., limiting velocity to prevent catastrophic slip).
+* **Graceful Degradation:** If the terrain classifier fails or environmental conditions blind the cameras, the MPC defaults to a highly conservative kinematic profile, assuming the terrain is low-traction (e.g. limiting velocity to prevent catastrophic slip).
 
 ### Performance Efficiency
-* **Edge-Cloud Compute Split:** Latency-sensitive calculations, specifically the mathematical optimization of the MPC at 50Hz and real-time sensor fusion, execute on onboard edge hardware (e.g., NVIDIA Jetson). Computationally massive tasks, such as global point-cloud stitching and neural network backpropagation, run on auto-scaling GPU cloud instances.
+* **Edge-Cloud Compute Split:** Latency-sensitive calculations, specifically the mathematical optimization of the MPC at 50Hz and real-time sensor fusion, execute on onboard edge hardware (e.g. NVIDIA Jetson). Computationally massive tasks, such as global point-cloud stitching and neural network backpropagation, run on auto-scaling GPU cloud instances.
 * **Algorithm Efficiency:** The global planner uses a multi-layered costmap, processing 2.5D elevation data to quickly prune impassable routes before the computationally heavier local MPC attempts to solve for a trajectory.
 
 ### Cost Optimization
